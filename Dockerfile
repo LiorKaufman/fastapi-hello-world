@@ -9,7 +9,7 @@ RUN apt-get update \
   && apt-get -y install g++ \
   && apt-get -y install unixodbc unixodbc-dev \
   && apt-get clean
-RUN sudo apt install python3-pip python3-dev unixodbc-dev
+RUN apt-get install python3-pip python3-dev 
 RUN pip3 install --user pyodbc
 RUN pip --no-cache-dir install -r requirements.txt
 EXPOSE 8000
