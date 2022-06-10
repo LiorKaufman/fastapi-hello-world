@@ -1,4 +1,3 @@
-from xml.etree.ElementInclude import include
 from fastapi import FastAPI
 from pydantic import BaseModel
 from helpers.db import get_db_engine
