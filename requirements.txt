@@ -5,3 +5,4 @@ azure-identity
 python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
+pyodbc
