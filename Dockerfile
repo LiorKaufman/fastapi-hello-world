@@ -12,4 +12,4 @@ RUN apt-get update \
 RUN pip3 install --user pyodbc
 RUN pip --no-cache-dir install -r requirements.txt
 EXPOSE 8000
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
