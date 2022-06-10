@@ -34,7 +34,7 @@ COPY requirements.txt .
 # #   && apt-get -y install g++ \
 # #   && apt-get -y install unixodbc unixodbc-dev \
 # #   && apt-get clean
-RUN pip3 install --user pyodbc
+# RUN pip3 install --user pyodbc
 RUN pip --no-cache-dir install -r requirements.txt
 WORKDIR /app
 EXPOSE 8000
