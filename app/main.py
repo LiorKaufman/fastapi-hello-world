@@ -1,3 +1,4 @@
+from xml.etree.ElementInclude import include
 from fastapi import FastAPI
 from pydantic import BaseModel
 from helpers.db import get_db_engine
@@ -19,7 +20,6 @@ app.include_router(users.router)
 app.include_router(auth.router)
 app.include_router(heroes.router)
 
-
 @app.get("/")
 def hello_world():
     return {"Hello": "Wo"}
@@ -29,7 +29,7 @@ class Password(BaseModel):
     password: str
 
 
-@app.post("/hash_password")
+@app.post("/hash_password",include_in_schema=False)
 def hash_password(password: Password):
     print("start hashing password")
     a = get_hashed_password(password.password)
