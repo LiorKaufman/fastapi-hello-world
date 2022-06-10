@@ -29,7 +29,7 @@ RUN apt-get update \
  && install2.r odbc \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
- && rm -rf /tmp/*```
+ && rm -rf /tmp/*
 # RUN apt-get update \
 #   && apt-get -y install gcc \
 #   && apt-get -y install g++ \
