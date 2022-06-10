@@ -1,19 +1,15 @@
-from fastapi.security import OAuth2PasswordRequestForm
 from models.hero import User
 from helpers.utils import (
-    get_hashed_password,
     create_access_token,
     create_refresh_token,
     verify_password,
 )
-from uuid import uuid4
-from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from pydantic import BaseModel
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlmodel import Field, Session, SQLModel, select
-from helpers.db import get_db_engine
-
-
+from fastapi import APIRouter, HTTPException, status
+from sqlmodel import SQLModel, select
+from helpers.db import session
+from fastapi.security.oauth2 import OAuth2PasswordRequestForm
+from fastapi import Depends
 router = APIRouter()
 
 
@@ -22,7 +18,9 @@ class Token(BaseModel):
     refresh_token: str
 
 
-engine = get_db_engine()
+class UserLogin(SQLModel):
+    username: str
+    password: str
 
 
 @router.post(
@@ -31,16 +29,14 @@ engine = get_db_engine()
     response_model=Token,
     include_in_schema=False,
 )
-async def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    with Session(engine) as session:
-        statement = select(User).where(User.email == form_data.username)
-        results = session.exec(statement)
-        user = results.first()
-        if user is None:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Incorrect email or password",
-            )
+async def login(form_data:  OAuth2PasswordRequestForm = Depends()):
+    user = select(User).where(User.email == form_data.username)
+    user = session.exec(user).first()
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Incorrect email or password",
+        )
 
     hashed_pass = user.password
     if not verify_password(form_data.password, hashed_pass):
@@ -48,9 +44,6 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Incorrect email or password",
         )
-    access_token = create_access_token(user.email) 
+    access_token = create_access_token(user.email)
     refresh_token = create_refresh_token(user.email)
-    return {
-        "access_token": access_token,
-        "refresh_token": refresh_token
-    }
+    return {"access_token": access_token, "refresh_token": refresh_token}
