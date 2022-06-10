@@ -33,10 +33,9 @@ jobs:
           registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           registry-username: ${{ secrets.REGISTRY_USERNAME }}
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-          name: aci-sampleapp
+          name: fastapi-sampleapp
           cpu: 1
           # memory: 0.5
-          command-line: /bin/bash a.sh
           location: "west us"
           environment-variables: JWT_REFRESH_SECRET_KEY=${{secrets.JWT_REFRESH_SECRET_KEY}} JWT_SECRET_KEY=${{secrets.JWT_SECRET_KEY}} SERVER_NAME=${{secrets.SERVER_NAME}} DATABASE=${{secrets.DATABASE}}
           restart-policy: never
