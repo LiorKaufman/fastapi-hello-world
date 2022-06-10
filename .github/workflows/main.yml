@@ -39,3 +39,4 @@ jobs:
           command-line: /bin/bash a.sh
           location: "west us"
           environment-variables: JWT_REFRESH_SECRET_KEY=${{secrets.JWT_REFRESH_SECRET_KEY}} JWT_SECRET_KEY=${{secrets.JWT_SECRET_KEY}} SERVER_NAME=${{secrets.SERVER_NAME}} DATABASE=${{secrets.DATABASE}}
+          restart-policy: never
