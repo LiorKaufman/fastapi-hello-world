@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     cron \
     nano \
     tdsodbc \
-    odbc-postgresql \
+    odbc\
     libsqliteodbc \
     ## clean up
     && apt-get clean \ 
@@ -26,7 +26,6 @@ RUN apt-get update \
  && curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list \
  && apt-get update \
  && ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql18 \
- && odbc \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /tmp/*
