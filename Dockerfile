@@ -1,4 +1,5 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+FROM python:3.9-slim
+
 
 COPY ./app /app
 
@@ -8,6 +9,8 @@ RUN apt-get update \
   && apt-get -y install g++ \
   && apt-get -y install unixodbc unixodbc-dev \
   && apt-get clean
+RUN sudo apt install python3-pip python3-dev unixodbc-dev
+RUN pip3 install --user pyodbc
 RUN pip --no-cache-dir install -r requirements.txt
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
