@@ -1,4 +1,4 @@
-FROM python:3.9-slim-strech
+FROM python:3.9-slim-buster
 
 
 COPY ./app /app
