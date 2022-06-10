@@ -1,6 +1,7 @@
-certifi==2020.12.5
-click==7.1.2
-fastapi==0.63.0
-h11==0.11.0
-starlette==0.13.6
-uvicorn==0.13.3
+fastapi
+uvicorn
+sqlmodel
+azure-identity
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
