@@ -35,7 +35,7 @@ jobs:
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: aci-sampleapp
             cpu: 1
-            memory: 0.5
+            # memory: 0.5
             command-line: /bin/bash a.sh
             location: 'west us'
             environment-variables: JWT_REFRESH_SECRET_KEY=${{secrets.JWT_REFRESH_SECRET_KEY}} JWT_SECRET_KEY=${{secrets.JWT_SECRET_KEY}} 
