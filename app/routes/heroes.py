@@ -1,5 +1,5 @@
-from models.hero import Hero
-from helpers.db import session
+from app.models.hero import Hero
+from app.helpers.db import session
 from sqlmodel import select 
 from fastapi import APIRouter, Depends
 from fastapi.security.oauth2 import OAuth2PasswordBearer

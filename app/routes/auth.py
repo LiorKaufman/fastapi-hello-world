@@ -1,5 +1,5 @@
-from models.hero import User
-from helpers.utils import (
+from app.models.hero import User
+from app.helpers.utils import (
     create_access_token,
     create_refresh_token,
     verify_password,
@@ -7,7 +7,7 @@ from helpers.utils import (
 from pydantic import BaseModel
 from fastapi import APIRouter, HTTPException, status
 from sqlmodel import SQLModel, select
-from helpers.db import session
+from app.helpers.db import session
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from fastapi import Depends
 router = APIRouter()

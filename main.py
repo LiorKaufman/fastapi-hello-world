@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from helpers.db import get_db_engine
-from helpers.utils import (
+from app.helpers.db import get_db_engine
+from app.helpers.utils import (
     get_hashed_password,
 
 )
-from routes import auth, users, heroes
+from app.routes import auth, users, heroes
 from sqlmodel import SQLModel 
 
 app = FastAPI(

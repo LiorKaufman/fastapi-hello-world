@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.params import Query
 from fastapi.security.oauth2 import OAuth2PasswordBearer
 from sqlmodel import Field, Session, SQLModel, select
-from models.hero import User
-from helpers.db import session
+from app.models.hero import User
+from app.helpers.db import session
 
 router = APIRouter(prefix="/users")
 
