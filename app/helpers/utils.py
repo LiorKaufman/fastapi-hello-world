@@ -3,12 +3,20 @@ import os
 from datetime import datetime, timedelta
 from typing import Union, Any
 from jose import jwt
+from azure.identity import DefaultAzureCredential
+from azure.keyvault.secrets import SecretClient
 
 ACCESS_TOKEN_EXPIRE_MINUTES = 30  # 30 minutes
 REFRESH_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7 # 7 days
 ALGORITHM = "HS256"
-JWT_SECRET_KEY = os.environ['JWT_SECRET_KEY']     # should be kept secret
-JWT_REFRESH_SECRET_KEY = os.environ['JWT_REFRESH_SECRET_KEY']      # should be kept secret
+
+credential = DefaultAzureCredential()
+secret_client = SecretClient(vault_url="https://fastapi-keyvault.vault.azure.net/", credential=credential)
+jwt_secret = secret_client.get_secret("JWT-SECRET-KEY")
+jwt_refresh_secret = secret_client.get_secret("JWT-REFRESH-SECRET-KEY")
+
+JWT_SECRET_KEY = jwt_secret.value     # should be kept secret
+JWT_REFRESH_SECRET_KEY = jwt_refresh_secret.value     # should be kept secret
 
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

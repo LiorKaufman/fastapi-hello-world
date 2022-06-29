@@ -19,7 +19,7 @@ tokenstruct = struct.pack("=i", len(exptoken)) + exptoken;
 server = os.getenv("SERVER_NAME")
 database = os.getenv("DATABASE")
 # build connection string using acquired token
-connString = "Driver={ODBC Driver 17 for SQL Server};SERVER="+server+";DATABASE="+database+""
+connString = "Driver={ODBC Driver 18 for SQL Server};SERVER="+server+";DATABASE="+database+""
 SQL_COPT_SS_ACCESS_TOKEN = 1256 
 # conn = pyodbc.connect(connString, attrs_before = {SQL_COPT_SS_ACCESS_TOKEN:tokenstruct});
 connection_url = URL.create("mssql+pyodbc", query={"odbc_connect": connString})
